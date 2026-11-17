@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — AI Media Detector</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+
+  <!-- ══ SIDEBAR ══ -->
+  <aside class="sidebar" id="sidebar">
+    <!-- Brand -->
+    <div class="sidebar-brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 40 40" fill="none">
+          <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M14 20 L18 24 L26 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="20" cy="20" r="6" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2"/>
+        </svg>
+      </div>
+      <span class="brand-name">MediaVerify</span>
+    </div>
+
+    <!-- User Profile -->
+    <div class="sidebar-profile">
+      <div class="avatar" id="sidebarAvatar">JD</div>
+      <div class="profile-info">
+        <span class="profile-name" id="sidebarName">Loading...</span>
+        <span class="profile-email" id="sidebarEmail">...</span>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-view="dashboard">
+        <svg viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="11" y="2" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="2" y="11" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="11" y="11" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.5"/></svg>
+        <span>Dashboard</span>
+      </a>
+      <a href="#" class="nav-item" data-view="detect">
+        <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="1.5"/><line x1="10" y1="1" x2="10" y2="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="10" y1="16" x2="10" y2="19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="10" x2="4" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="16" y1="10" x2="19" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>New Detection</span>
+        <span class="nav-badge">New</span>
+      </a>
+      <a href="#" class="nav-item" data-view="history">
+        <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><polyline points="10,6 10,10 13,13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>History</span>
+      </a>
+    </nav>
+
+    <!-- Sidebar Footer -->
+    <div class="sidebar-footer">
+      <!-- Dark mode toggle -->
+      <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+        <svg class="icon-moon" viewBox="0 0 20 20" fill="none"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" stroke="currentColor" stroke-width="1.5"/></svg>
+        <svg class="icon-sun hidden" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="1.5"/><line x1="10" y1="1" x2="10" y2="3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="10" y1="17" x2="10" y2="19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="10" x2="3" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="17" y1="10" x2="19" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="3.22" y1="3.22" x2="4.64" y2="4.64" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="15.36" y1="15.36" x2="16.78" y2="16.78" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>Dark Mode</span>
+      </button>
+      <button class="logout-btn" id="logoutBtn">
+        <svg viewBox="0 0 20 20" fill="none"><path d="M7 3H4a1 1 0 00-1 1v12a1 1 0 001 1h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><polyline points="13,7 17,10 13,13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="17" y1="10" x2="7" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Mobile sidebar overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ══ MAIN CONTENT ══ -->
+  <main class="main-content">
+    <!-- Top Bar -->
+    <header class="topbar">
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">
+        <svg viewBox="0 0 20 20" fill="none"><line x1="3" y1="6" x2="17" y2="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="3" y1="10" x2="17" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="3" y1="14" x2="17" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div class="topbar-title" id="topbarTitle">Dashboard</div>
+      <div class="topbar-actions">
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          <span class="status-text">API Connected</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── DASHBOARD VIEW ── -->
+    <section class="view active" id="view-dashboard">
+      <div class="view-header">
+        <div>
+          <h1 class="view-title">Hello, <span id="greetName">there</span> 👋</h1>
+          <p class="view-subtitle">Here's an overview of your media analysis activity.</p>
+        </div>
+        <button class="btn-detect" onclick="switchView('detect')">
+          <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><line x1="10" y1="7" x2="10" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="7" y1="10" x2="13" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          New Detection
+        </button>
+      </div>
+
+      <!-- Stats Row -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon cyan"><svg viewBox="0 0 20 20" fill="none"><path d="M4 3h12a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.5"/><path d="M3 7h14M7 3v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <div class="stat-info">
+            <span class="stat-value" id="statTotal">0</span>
+            <span class="stat-label">Total Analyzed</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon red"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><line x1="10" y1="7" x2="10" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="10" cy="13.5" r="0.75" fill="currentColor"/></svg></div>
+          <div class="stat-info">
+            <span class="stat-value" id="statAI">0</span>
+            <span class="stat-label">AI Detected</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green"><svg viewBox="0 0 20 20" fill="none"><path d="M5 10l4 4 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="stat-info">
+            <span class="stat-value" id="statReal">0</span>
+            <span class="stat-label">Real Media</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon purple"><svg viewBox="0 0 20 20" fill="none"><path d="M10 2l2.5 5 5.5.8-4 3.9.9 5.5L10 14.5 5 17.2l.9-5.5L2 7.8l5.5-.8L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+          <div class="stat-info">
+            <span class="stat-value" id="statAccuracy">—</span>
+            <span class="stat-label">Avg. Confidence</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="section-card">
+        <div class="section-header">
+          <h3>Recent Activity</h3>
+          <button class="link-btn" onclick="switchView('history')">View All</button>
+        </div>
+        <div class="history-list" id="dashboardHistory">
+          <div class="empty-state">
+            <svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="28" stroke="currentColor" stroke-width="1.5" opacity="0.3"/><path d="M20 30 L27 37 L40 23" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/></svg>
+            <p>No detections yet. <button class="link-btn" onclick="switchView('detect')">Start your first analysis →</button></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── DETECT VIEW ── -->
+    <section class="view" id="view-detect">
+      <div class="view-header">
+        <div>
+          <h1 class="view-title">Media Detection</h1>
+          <p class="view-subtitle">Upload an image or video to analyze for AI generation.</p>
+        </div>
+      </div>
+
+      <div class="detect-layout">
+        <!-- Upload Panel -->
+        <div class="upload-panel">
+          <!-- Drop Zone -->
+          <div class="drop-zone" id="dropZone">
+            <div class="drop-icon">
+              <svg viewBox="0 0 64 64" fill="none"><rect x="8" y="12" width="48" height="40" rx="6" stroke="currentColor" stroke-width="1.5"/><path d="M32 20v16m0 0l-6-6m6 6l6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 44h24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/></svg>
+            </div>
+            <div class="drop-text">
+              <p class="drop-main">Drag & drop media here</p>
+              <p class="drop-sub">Supports JPG, PNG, GIF, MP4, WebM · Max 50MB</p>
+            </div>
+            <button class="btn-upload" id="uploadBtn">
+              <svg viewBox="0 0 20 20" fill="none"><path d="M10 2l3.5 3.5M10 2L6.5 5.5M10 2v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 13v3a1 1 0 001 1h12a1 1 0 001-1v-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Browse Files
+            </button>
+            <input type="file" id="fileInput" accept="image/*,video/*" hidden />
+          </div>
+
+          <!-- File Preview -->
+          <div class="file-preview hidden" id="filePreview">
+            <div class="preview-header">
+              <span class="preview-filename" id="previewName">filename.jpg</span>
+              <button class="icon-btn" id="clearFile" title="Remove file">
+                <svg viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+            <div class="preview-media" id="previewMedia"></div>
+            <div class="preview-meta" id="previewMeta"></div>
+            <button class="btn-primary-full" id="analyzeBtn">
+              <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="1.5"/></svg>
+              Analyze Media
+            </button>
+          </div>
+        </div>
+
+        <!-- Result Panel -->
+        <div class="result-panel" id="resultPanel">
+          <!-- Empty state -->
+          <div class="result-empty" id="resultEmpty">
+            <div class="result-empty-icon">
+              <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="36" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" opacity="0.3"/><circle cx="40" cy="40" r="22" stroke="currentColor" stroke-width="1.5" opacity="0.4"/><circle cx="40" cy="40" r="8" stroke="currentColor" stroke-width="2" opacity="0.6"/></svg>
+            </div>
+            <p>Upload a file and run detection to see results here.</p>
+          </div>
+
+          <!-- Loading state -->
+          <div class="result-loading hidden" id="resultLoading">
+            <div class="scanner">
+              <div class="scanner-line"></div>
+              <svg class="scanner-icon" viewBox="0 0 80 80" fill="none">
+                <circle cx="40" cy="40" r="36" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4"/>
+                <circle cx="40" cy="40" r="22" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="40" cy="40" r="8" stroke="currentColor" stroke-width="2" fill="currentColor" opacity="0.5"/>
+              </svg>
+            </div>
+            <p class="loading-text">Analyzing with AI...</p>
+            <p class="loading-sub" id="loadingStep">Preprocessing media...</p>
+          </div>
+
+          <!-- Result -->
+          <div class="result-content hidden" id="resultContent">
+            <!-- Verdict Banner -->
+            <div class="verdict-banner" id="verdictBanner">
+              <div class="verdict-icon" id="verdictIcon"></div>
+              <div class="verdict-text">
+                <span class="verdict-label" id="verdictLabel">AI Generated</span>
+                <span class="verdict-sub" id="verdictSub">High confidence detection</span>
+              </div>
+            </div>
+
+            <!-- Confidence Meter -->
+            <div class="confidence-card">
+              <div class="confidence-header">
+                <span>Confidence Score</span>
+                <span class="confidence-value" id="confidenceValue">0%</span>
+              </div>
+              <div class="confidence-track">
+                <div class="confidence-fill" id="confidenceFill"></div>
+              </div>
+              <div class="confidence-labels">
+                <span>Real</span>
+                <span>Uncertain</span>
+                <span>AI Generated</span>
+              </div>
+            </div>
+
+            <!-- Breakdown -->
+            <div class="analysis-breakdown" id="analysisBreakdown">
+              <!-- populated by JS -->
+            </div>
+
+            <!-- Media analyzed -->
+            <div class="analyzed-thumb" id="analyzedThumb"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── HISTORY VIEW ── -->
+    <section class="view" id="view-history">
+      <div class="view-header">
+        <div>
+          <h1 class="view-title">Detection History</h1>
+          <p class="view-subtitle">All your previous media analyses.</p>
+        </div>
+        <div class="filter-group">
+          <select class="filter-select" id="historyFilter">
+            <option value="all">All Results</option>
+            <option value="ai">AI Generated</option>
+            <option value="real">Real Media</option>
+          </select>
+        </div>
+      </div>
+      <div class="history-grid" id="historyGrid">
+        <div class="empty-state">
+          <svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="28" stroke="currentColor" stroke-width="1.5" opacity="0.3"/><path d="M20 30 L27 37 L40 23" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/></svg>
+          <p>No analysis history yet.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast Notification -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Firebase SDKs -->
+  <script type="module" src="js/firebase-config.js?v=2"></script>
+  <script type="module" src="js/dashboard.js?v=2"></script>
+</body>
+</html>
