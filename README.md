@@ -42,7 +42,7 @@ ai-media-detector/
 
 ---
 
-## 🔄 System Architecture & Data Flow
+## 🔄 System Architecture & Data Flow -
 
 ```mermaid
 flowchart TD
@@ -353,5 +353,6 @@ service cloud.firestore {
 ## 📝 License
 
 Distributed under the MIT License. Feel free to modify and use for learning purposes.
-#   A I _ M e d i a _ D e t e c t o r  
+#   A I _ M e d i a _ D e t e c t o r 
+ 
  
