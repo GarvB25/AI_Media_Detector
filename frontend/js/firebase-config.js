@@ -27,6 +27,8 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 
 // Backend API base URL
-export const API_BASE = "http://localhost:3001/api";
+// Local development: http://localhost:3001/api
+// Production (Vercel): https://ai-media-detector-nu.vercel.app/api
+export const API_BASE = "https://ai-media-detector-nu.vercel.app/api";
 
 export default app;
